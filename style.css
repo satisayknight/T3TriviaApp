@@ -23,3 +23,30 @@ header {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
 }
+
+.game-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.general-knowledge-game-page {
+  text-decoration: none;
+  color: black;
+  border: 10px solid #D5F2E3;
+  width: 15%;
+  padding: 20px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 10px 10px 10px;
+  background: #6564DB;
+  color: white;
+  text-align: center;
+}
