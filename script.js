@@ -24,10 +24,12 @@ if (sumbitButton) {
 //   console.log("Here");
 // }
 
+
 // if (document.readyState === 'complete'){
 //   console.log(window.location);
 //   console.log("Here");
 // };
+
 
 /**
  *
@@ -71,6 +73,7 @@ export function getQuizData(
         // answersArray = _.shuffle(answersArray)
 
         populateQuestions(question, answersArray);
+
         // Button_Test.disabled = true;
       }
       // console.log(json["results"]);
@@ -194,6 +197,7 @@ function decodeHtml(html) {
   txt.innerHTML = html;
   return txt.value;
 }
+
 
 
 function showalert() {

@@ -1,5 +1,17 @@
+#page-container {
+  min-height: 100vh;
+  clear: both;
+  position: relative;
+}
+
+.nav {
+  background: #D5F2E3;
+  font-size: large;
+  font-family: 'JetBrains Mono', monospace;
+}
+
 header {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .page-title {
@@ -7,6 +19,8 @@ header {
   justify-content: center;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 800;
+  letter-spacing: 10px;
+  font-size: 52px;
 }
 
 .page-description {
@@ -14,14 +28,30 @@ header {
   justify-content: center;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 500;
+  font-size: 24px;
+}
+
+.page-intro-container {
+  display: flex;
+  justify-content: center;
+}
+
+.page-intro-paragraph {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  border: 4px dotted #D5F2E3;
+  width: 50%;
+  margin-top: 50px;
 }
 
 .catgegory-text {
   display: flex;
   justify-content: center;
-  margin-top: 7rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
+  font-size: 24px;
 }
 
 .game-container{
@@ -46,29 +76,36 @@ header {
   margin-bottom: 10px;
 }
 
-/* .general-knowledge-game-page {
-  text-decoration: none;
-  color: black;
-  border: 10px solid #D5F2E3;
-  width: 15%;
-  padding: 20px;
-  text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 500;
-} */
-
 .all-games-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
 }
 
-.general-knowledge-game-container, .science-nature-game-container, .art-game-container, .animals-game-container {
+.card {
+  margin-bottom: 5rem;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-text, .btn {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.btn {
+  margin-top: 20px;
+}
+
+#footer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 70px;
-  margin-bottom: 70px;
+  justify-content: space-around;
+  background: #D5F2E3;
+  width: 100%;
+  padding: 10px 10px 10px;
+  bottom: 0;
+  position: absolute;
+  color: #0d6efd;
+  text-align: center;
 }
 
 .animal-image {
@@ -78,3 +115,4 @@ header {
 
 #gifs_container{
   max-width: 200px;}
+
