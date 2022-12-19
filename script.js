@@ -5,7 +5,7 @@ let questionCount = 0;
 //test
 
 const Button_Test = document.getElementById("questionButton");
-const sumbitButton = document.getElementById("sumbit_button");
+// const sumbitButton = document.getElementById("sumbit_button");
 const general_knowledge = document.getElementById("general_knowledge");
 
 let correctAnswers = [];
@@ -15,9 +15,7 @@ let correctAnswers = [];
 if (general_knowledge) {
   general_knowledge.addEventListener("click", getQuizData);
 }
-if (sumbitButton) {
-  sumbitButton.addEventListener("click", questionValidation);
-}
+
 
 // if (true) {
 //   console.log(window.location.hash);
@@ -120,24 +118,33 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   <div class="card">
   <div class="card-body">
     <b>${questionCount}. ${question}</b>
-    <ul>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}0">
+    <div class="form-group">
+    <div>
+      <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}0">
       <label class="form-check-label" for="flexRadioDefault${questionCount}0">
       ${answers[0]}
-      </label></li>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}1">
+      </label>
+      </div>
+      <div>
+      <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}1">
       <label class="form-check-label" for="flexRadioDefault${questionCount}1">
       ${answers[1]}
-      </label></li>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}2">
+      </label>
+      </div>
+      <div>
+      <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}2">
       <label class="form-check-label" for="flexRadioDefault${questionCount}2">
       ${answers[2]}
-      </label></li>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
+      </label>
+      </div>
+      <div>
+      <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
       <label class="form-check-label" for="flexRadioDefault${questionCount}3">
       ${answers[3]}
-      </label></li>
-    </ul>
+      </label>
+      </div>
+      </div>
+ 
     </div>
     </div>    
         `;
@@ -145,7 +152,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   questionQuestionContainer.innerHTML += questionTemplate;
 }
 
-function questionValidation() {
+export function questionValidation() {
   let questionsChecked = 0;
   let questionsCorrect = 0;
 
@@ -218,44 +225,44 @@ function showalert() {
 }
 
 
-sumbitButton.addEventListener("click", Gif_retrieval);
-sumbitButton.addEventListener("click", myFunction);
+// sumbitButton.addEventListener("click", Gif_retrieval);
+// sumbitButton.addEventListener("click", myFunction);
 
-function myFunction() {
-  let txt;
-  let text;
-  let questionsCorrect = questionValidation();
-  if (questionsCorrect >= 7) {
-    txt = "You WIN!";
-    text = "Great Job...!!!";
-  } else {
-    txt = "You Lose!";
-    text = "Better Luck Next Time!!!";
-  }
-  document.getElementById("exampleModalLabel").innerHTML = txt;
-  document.getElementById("modal_text").innerHTML = text;
-}
+// function myFunction() {
+//   let txt;
+//   let text;
+//   let questionsCorrect = questionValidation();
+//   if (questionsCorrect >= 7) {
+//     txt = "You WIN!";
+//     text = "Great Job...!!!";
+//   } else {
+//     txt = "You Lose!";
+//     text = "Better Luck Next Time!!!";
+//   }
+//   document.getElementById("exampleModalLabel").innerHTML = txt;
+//   document.getElementById("modal_text").innerHTML = text;
+// }
 
-function Gif_retrieval() {
-  let questionsCorrect = questionValidation();
-  let txt;
-  if (questionsCorrect >= 7) {
-    txt = "Win";
-  } else {
-    txt = "Lose";
-  }
-  const api_url = `https://api.giphy.com/v1/gifs/search?api_key=05buYscSAn6xA1qiwVS5XZS6OqXQRMqZ&q=${txt}`;
-  let randomnumber = Math.floor(Math.random() * 50);
-  gifs_container.innerHTML = "";
-  fetch(api_url)
-    .then((res) => res.json())
-    .then((json) => {
-      const gifs = json.data;
-      console.log(gifs);
-      let randomImage = gifs[randomnumber];
-      const url = randomImage.images.downsized_medium.url;
-      const myImg = document.createElement("img");
-      myImg.setAttribute("src", url);
-      gifs_container.appendChild(myImg);
-    });
-}
+// function Gif_retrieval() {
+//   let questionsCorrect = questionValidation();
+//   let txt;
+//   if (questionsCorrect >= 7) {
+//     txt = "Win";
+//   } else {
+//     txt = "Lose";
+//   }
+//   const api_url = `https://api.giphy.com/v1/gifs/search?api_key=05buYscSAn6xA1qiwVS5XZS6OqXQRMqZ&q=${txt}`;
+//   let randomnumber = Math.floor(Math.random() * 50);
+//   gifs_container.innerHTML = "";
+//   fetch(api_url)
+//     .then((res) => res.json())
+//     .then((json) => {
+//       const gifs = json.data;
+//       console.log(gifs);
+//       let randomImage = gifs[randomnumber];
+//       const url = randomImage.images.downsized_medium.url;
+//       const myImg = document.createElement("img");
+//       myImg.setAttribute("src", url);
+//       gifs_container.appendChild(myImg);
+//     });
+// }
