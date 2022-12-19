@@ -6,11 +6,28 @@ let questionCount = 0;
 
 const Button_Test = document.getElementById("questionButton");
 const sumbitButton = document.getElementById("sumbit_button");
+const general_knowledge = document.getElementById("general_knowledge");
+
 let correctAnswers = [];
 
-Button_Test.addEventListener("click", getQuizData);
-sumbitButton.addEventListener("click", questionValidation);
+// Button_Test.addEventListener("click", getQuizData);
 
+if (general_knowledge) {
+  general_knowledge.addEventListener("click", getQuizData);
+}
+if (sumbitButton) {
+  sumbitButton.addEventListener("click", questionValidation);
+}
+
+// if (true) {
+//   console.log(window.location.hash);
+//   console.log("Here");
+// }
+
+// if (document.readyState === 'complete'){
+//   console.log(window.location);
+//   console.log("Here");
+// };
 
 /**
  *
@@ -19,13 +36,16 @@ sumbitButton.addEventListener("click", questionValidation);
  * @param {string} difficulty - a string on diffuculty of questions "easy","medium","hard"
  * @param {string} typeOfQuestions - a string either boolean for true/fale or multiple choice.
  */
-function getQuizData(
+export function getQuizData(
   event,
   category = "9",
   numberOfQuestions = "10",
   difficulty = "easy",
   typeOfQuestions = "multiple"
 ) {
+
+  // window.location='trivia_game.html';
+
   const api_url = `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=${typeOfQuestions}&token=${SESSION_TOKEN}`;
 
   console.log("URL:" + api_url);
@@ -43,24 +63,22 @@ function getQuizData(
       for (let index = 0; index < questions.length; index++) {
         let question = questions[index].question;
         let answersArray = questions[index].incorrect_answers;
-        let correctAnswer = questions[index].correct_answer;;
+        let correctAnswer = questions[index].correct_answer;
         answersArray.push(correctAnswer);
         correctAnswers.push(decodeHtml(correctAnswer));
 
-        //shuffle array here 
+        //shuffle array here
         // answersArray = _.shuffle(answersArray)
 
-
-
         populateQuestions(question, answersArray);
-        Button_Test.disabled = true;
-
+        // Button_Test.disabled = true;
       }
       // console.log(json["results"]);
     })
     .catch((error) => {
       console.log(error);
     });
+  
 }
 
 /**
@@ -78,12 +96,9 @@ function getSessionToken() {
       SESSION_TOKEN = json["token"];
     })
     .catch((error) => {
-
       console.log(error);
     });
 }
-
-
 
 /**
  * Populates questions that are passed into the question container div
@@ -95,6 +110,8 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
 
   const questionQuestionContainer =
     document.getElementById("question_container");
+
+  // <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3" checked>
 
   const questionTemplate = `
   <div class="card">
@@ -113,7 +130,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
       <label class="form-check-label" for="flexRadioDefault${questionCount}2">
       ${answers[2]}
       </label></li>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3" checked>
+      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
       <label class="form-check-label" for="flexRadioDefault${questionCount}3">
       ${answers[3]}
       </label></li>
@@ -125,9 +142,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   questionQuestionContainer.innerHTML += questionTemplate;
 }
 
-
 function questionValidation() {
-
   let questionsChecked = 0;
   let questionsCorrect = 0;
 
@@ -135,50 +150,67 @@ function questionValidation() {
   let temp = [];
   console.log(questionRadioButtons);
 
-
-
-  questionRadioButtons.forEach(element => {
+  questionRadioButtons.forEach((element) => {
     if (element.checked) {
       questionsChecked++;
       console.log("Checked: " + questionsChecked);
-      temp.push(element)
+      temp.push(element);
     } else {
-
     }
   });
 
   if (questionsChecked != 10) {
-    // pop up some alert here
+    // document.prepend(incompleteQuestionAlert);
+
+    showalert();
   } else {
     // send to modal?
-    temp.forEach(element => {
+    temp.forEach((element) => {
       // console.log(element.id);
 
       let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
-      let labelAnswerText = labelTest.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+      let labelAnswerText = labelTest.textContent
+        .replace(/[\n\r]+|[\s]{2,}/g, " ")
+        .trim();
 
       // console.log(stringTest);
       // console.log(typeof stringTest);
       // console.log(correctAnswers);
 
       if (correctAnswers.includes(labelAnswerText)) {
-        console.log('✅ String is contained in Array');
+        console.log("✅ String is contained in Array");
         questionsCorrect++;
       } else {
-        console.log('⛔️ String is NOT contained in Array');
+        console.log("⛔️ String is NOT contained in Array");
       }
-
     });
-
   }
   console.log("Questions correct: " + questionsCorrect);
   console.log(correctAnswers);
-};
+}
 
 function decodeHtml(html) {
   var txt = document.createElement("textarea");
   txt.innerHTML = html;
   return txt.value;
+}
+
+
+function showalert() {
+  let test = document.getElementById("alert_placeholder");
+
+  const incompleteQuestionAlert = ` 
+  <div class="alert alert-warning" role="alert">
+  Please complete all questions before submitting!
+  </div>`;
+
+  test.innerHTML = incompleteQuestionAlert;
+
+  setTimeout(function () {
+    // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    test.innerHTML = "";
+  }, 5000);
 }
 
 
