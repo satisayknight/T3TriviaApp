@@ -11,7 +11,6 @@ let correctAnswers = [];
 Button_Test.addEventListener("click", getQuizData);
 sumbitButton.addEventListener("click", questionValidation);
 
-
 /**
  *
  * @param {number} category - a number from 9-32 indicates which category
@@ -43,18 +42,15 @@ function getQuizData(
       for (let index = 0; index < questions.length; index++) {
         let question = questions[index].question;
         let answersArray = questions[index].incorrect_answers;
-        let correctAnswer = questions[index].correct_answer;;
+        let correctAnswer = questions[index].correct_answer;
         answersArray.push(correctAnswer);
         correctAnswers.push(decodeHtml(correctAnswer));
 
-        //shuffle array here 
+        //shuffle array here
         // answersArray = _.shuffle(answersArray)
-
-
 
         populateQuestions(question, answersArray);
         Button_Test.disabled = true;
-
       }
       // console.log(json["results"]);
     })
@@ -78,12 +74,9 @@ function getSessionToken() {
       SESSION_TOKEN = json["token"];
     })
     .catch((error) => {
-
       console.log(error);
     });
 }
-
-
 
 /**
  * Populates questions that are passed into the question container div
@@ -125,9 +118,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   questionQuestionContainer.innerHTML += questionTemplate;
 }
 
-
 function questionValidation() {
-
   let questionsChecked = 0;
   let questionsCorrect = 0;
 
@@ -135,15 +126,12 @@ function questionValidation() {
   let temp = [];
   console.log(questionRadioButtons);
 
-
-
-  questionRadioButtons.forEach(element => {
+  questionRadioButtons.forEach((element) => {
     if (element.checked) {
       questionsChecked++;
       console.log("Checked: " + questionsChecked);
-      temp.push(element)
+      temp.push(element);
     } else {
-
     }
   });
 
@@ -151,29 +139,29 @@ function questionValidation() {
     // pop up some alert here
   } else {
     // send to modal?
-    temp.forEach(element => {
+    temp.forEach((element) => {
       // console.log(element.id);
 
       let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
-      let labelAnswerText = labelTest.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+      let labelAnswerText = labelTest.textContent
+        .replace(/[\n\r]+|[\s]{2,}/g, " ")
+        .trim();
 
       // console.log(stringTest);
       // console.log(typeof stringTest);
       // console.log(correctAnswers);
 
       if (correctAnswers.includes(labelAnswerText)) {
-        console.log('✅ String is contained in Array');
+        console.log("✅ String is contained in Array");
         questionsCorrect++;
       } else {
-        console.log('⛔️ String is NOT contained in Array');
+        console.log("⛔️ String is NOT contained in Array");
       }
-
     });
-
   }
   console.log("Questions correct: " + questionsCorrect);
   console.log(correctAnswers);
-};
+}
 
 function decodeHtml(html) {
   var txt = document.createElement("textarea");
