@@ -57,10 +57,21 @@ header {
   font-weight: 500;
 } */
 
-
-.general-knowledge-game-container {
+.all-games-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.general-knowledge-game-container, .science-nature-game-container, .art-game-container, .animals-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.animal-image {
+  width: 50%;
+  height: 50%;
 }
