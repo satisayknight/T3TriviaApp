@@ -75,3 +75,6 @@ header {
   width: 50%;
   height: 50%;
 }
+
+#gifs_container{
+  max-width: 200px;}
