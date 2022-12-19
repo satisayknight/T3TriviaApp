@@ -47,7 +47,14 @@ function getQuizData(
         answersArray.push(correctAnswer);
         correctAnswers.push(decodeHtml(correctAnswer));
 
+        //shuffle array here 
+        // answersArray = _.shuffle(answersArray)
+
+
+
         populateQuestions(question, answersArray);
+        Button_Test.disabled = true;
+
       }
       // console.log(json["results"]);
     })
@@ -78,34 +85,16 @@ function getSessionToken() {
 
 
 
-
+/**
+ * Populates questions that are passed into the question container div
+ * @param {number} question - a number from 9-32 indicates which category
+ * @param {number} answers - a number indicates how many questions are returned range(1-50)
+ */
 function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   questionCount++;
 
   const questionQuestionContainer =
     document.getElementById("question_container");
-
-
-
-  // const questionTemplate = `
-  // <div>
-  //   <b>${questionCount}. ${question}</b>
-  //   <ul>
-  //     <li>${answers[0]}</li>
-  //     <li>${answers[1]}</li>
-  //     <li>${answers[2]}</li>
-  //     <li>${answers[3]}</li>
-
-  //   </ul>
-  // <div>
-  //   // `;
-
-  //   <div class="card">
-  //   <div class="card-body">
-  //     This is some text within a card body.
-  //   </div>
-  // </div>
-
 
   const questionTemplate = `
   <div class="card">
@@ -124,7 +113,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
       <label class="form-check-label" for="flexRadioDefault${questionCount}2">
       ${answers[2]}
       </label></li>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
+      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3" checked>
       <label class="form-check-label" for="flexRadioDefault${questionCount}3">
       ${answers[3]}
       </label></li>
@@ -153,7 +142,7 @@ function questionValidation() {
       questionsChecked++;
       console.log("Checked: " + questionsChecked);
       temp.push(element)
-    }else{
+    } else {
 
     }
   });
@@ -165,13 +154,14 @@ function questionValidation() {
     temp.forEach(element => {
       // console.log(element.id);
 
-      let labelTest = document.querySelector(`[for ^= "${element.id}"]`);
-      let stringTest  = labelTest.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
-      console.log(stringTest);
-      console.log(typeof stringTest);
+      let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
+      let labelAnswerText = labelTest.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+
+      // console.log(stringTest);
+      // console.log(typeof stringTest);
       // console.log(correctAnswers);
 
-      if (correctAnswers.includes(stringTest)) {
+      if (correctAnswers.includes(labelAnswerText)) {
         console.log('✅ String is contained in Array');
         questionsCorrect++;
       } else {
@@ -180,15 +170,9 @@ function questionValidation() {
 
     });
 
-
   }
-
   console.log("Questions correct: " + questionsCorrect);
   console.log(correctAnswers);
-
-
-
-
 };
 
 function decodeHtml(html) {
