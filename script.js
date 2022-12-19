@@ -6,10 +6,30 @@ let questionCount = 0;
 
 const Button_Test = document.getElementById("questionButton");
 const sumbitButton = document.getElementById("sumbit_button");
+const general_knowledge = document.getElementById("general_knowledge");
+
 let correctAnswers = [];
 
-Button_Test.addEventListener("click", getQuizData);
-sumbitButton.addEventListener("click", questionValidation);
+// Button_Test.addEventListener("click", getQuizData);
+
+if (general_knowledge) {
+  general_knowledge.addEventListener("click", getQuizData);
+}
+if (sumbitButton) {
+  sumbitButton.addEventListener("click", questionValidation);
+}
+
+// if (true) {
+//   console.log(window.location.hash);
+//   console.log("Here");
+// }
+
+
+// if (document.readyState === 'complete'){
+//   console.log(window.location);
+//   console.log("Here");
+// };
+
 
 /**
  *
@@ -18,13 +38,16 @@ sumbitButton.addEventListener("click", questionValidation);
  * @param {string} difficulty - a string on diffuculty of questions "easy","medium","hard"
  * @param {string} typeOfQuestions - a string either boolean for true/fale or multiple choice.
  */
-function getQuizData(
+export function getQuizData(
   event,
   category = "9",
   numberOfQuestions = "10",
   difficulty = "easy",
   typeOfQuestions = "multiple"
 ) {
+
+  // window.location='trivia_game.html';
+
   const api_url = `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=${typeOfQuestions}&token=${SESSION_TOKEN}`;
 
   console.log("URL:" + api_url);
@@ -50,13 +73,15 @@ function getQuizData(
         // answersArray = _.shuffle(answersArray)
 
         populateQuestions(question, answersArray);
-        Button_Test.disabled = true;
+
+        // Button_Test.disabled = true;
       }
       // console.log(json["results"]);
     })
     .catch((error) => {
       console.log(error);
     });
+  
 }
 
 /**
@@ -89,6 +114,8 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   const questionQuestionContainer =
     document.getElementById("question_container");
 
+  // <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3" checked>
+
   const questionTemplate = `
   <div class="card">
   <div class="card-body">
@@ -106,7 +133,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
       <label class="form-check-label" for="flexRadioDefault${questionCount}2">
       ${answers[2]}
       </label></li>
-      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3" checked>
+      <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
       <label class="form-check-label" for="flexRadioDefault${questionCount}3">
       ${answers[3]}
       </label></li>
@@ -136,7 +163,9 @@ function questionValidation() {
   });
 
   if (questionsChecked != 10) {
-    // pop up some alert here
+    // document.prepend(incompleteQuestionAlert);
+
+    showalert();
   } else {
     // send to modal?
     temp.forEach((element) => {
@@ -167,4 +196,66 @@ function decodeHtml(html) {
   var txt = document.createElement("textarea");
   txt.innerHTML = html;
   return txt.value;
+}
+
+
+
+function showalert() {
+  let test = document.getElementById("alert_placeholder");
+
+  const incompleteQuestionAlert = ` 
+  <div class="alert alert-warning" role="alert">
+  Please complete all questions before submitting!
+  </div>`;
+
+  test.innerHTML = incompleteQuestionAlert;
+
+  setTimeout(function () {
+    // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+    test.innerHTML = "";
+  }, 5000);
+}
+
+
+sumbitButton.addEventListener("click", Gif_retrieval);
+sumbitButton.addEventListener("click", myFunction);
+
+function myFunction() {
+  let txt;
+  let text;
+  let questionsCorrect = questionValidation();
+  if (questionsCorrect >= 7) {
+    txt = "You WIN!";
+    text = "Great Job...!!!";
+  } else {
+    txt = "You Lose!";
+    text = "Better Luck Next Time!!!";
+  }
+  document.getElementById("exampleModalLabel").innerHTML = txt;
+  document.getElementById("modal_text").innerHTML = text;
+}
+
+function Gif_retrieval() {
+  let questionsCorrect = questionValidation();
+  let txt;
+  if (questionsCorrect >= 7) {
+    txt = "Win";
+  } else {
+    txt = "Lose";
+  }
+  const api_url = `https://api.giphy.com/v1/gifs/search?api_key=05buYscSAn6xA1qiwVS5XZS6OqXQRMqZ&q=${txt}`;
+  let randomnumber = Math.floor(Math.random() * 50);
+  gifs_container.innerHTML = "";
+  fetch(api_url)
+    .then((res) => res.json())
+    .then((json) => {
+      const gifs = json.data;
+      console.log(gifs);
+      let randomImage = gifs[randomnumber];
+      const url = randomImage.images.downsized_medium.url;
+      const myImg = document.createElement("img");
+      myImg.setAttribute("src", url);
+      gifs_container.appendChild(myImg);
+    });
 }
