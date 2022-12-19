@@ -2,6 +2,7 @@ let SESSION_TOKEN = "";
 let questionCount = 0;
 
 // window.addEventListener("load", getSessionToken);
+//test
 
 const Button_Test = document.getElementById("questionButton");
 const sumbitButton = document.getElementById("sumbit_button");
