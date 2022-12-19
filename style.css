@@ -26,11 +26,27 @@ header {
 
 .game-container{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-top: 30px;
+  font-size: 24px;
 }
 
-.general-knowledge-game-page {
+.general-knowledge, .science-nature-game, .art-game, .animals-game{
+  text-decoration: none;
+  color: black;
+  border: 10px solid #D5F2E3;
+  width: 25%;
+  padding: 20px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* .general-knowledge-game-page {
   text-decoration: none;
   color: black;
   border: 10px solid #D5F2E3;
@@ -39,14 +55,12 @@ header {
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 500;
-}
+} */
 
-/* .footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  padding: 10px 10px 10px;
-  background: #6564DB;
-  color: white;
-  text-align: center;
-}  */
+
+.general-knowledge-game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 70px;
+}
