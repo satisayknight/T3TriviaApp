@@ -16,18 +16,15 @@ if (general_knowledge) {
   general_knowledge.addEventListener("click", getQuizData);
 }
 
-
 // if (true) {
 //   console.log(window.location.hash);
 //   console.log("Here");
 // }
 
-
 // if (document.readyState === 'complete'){
 //   console.log(window.location);
 //   console.log("Here");
 // };
-
 
 /**
  *
@@ -43,7 +40,6 @@ export function getQuizData(
   difficulty = "easy",
   typeOfQuestions = "multiple"
 ) {
-
   // window.location='trivia_game.html';
 
   const api_url = `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=${typeOfQuestions}&token=${SESSION_TOKEN}`;
@@ -79,7 +75,6 @@ export function getQuizData(
     .catch((error) => {
       console.log(error);
     });
-  
 }
 
 /**
@@ -205,8 +200,6 @@ function decodeHtml(html) {
   return txt.value;
 }
 
-
-
 function showalert() {
   let test = document.getElementById("alert_placeholder");
 
@@ -223,46 +216,3 @@ function showalert() {
     test.innerHTML = "";
   }, 5000);
 }
-
-
-// sumbitButton.addEventListener("click", Gif_retrieval);
-// sumbitButton.addEventListener("click", myFunction);
-
-// function myFunction() {
-//   let txt;
-//   let text;
-//   let questionsCorrect = questionValidation();
-//   if (questionsCorrect >= 7) {
-//     txt = "You WIN!";
-//     text = "Great Job...!!!";
-//   } else {
-//     txt = "You Lose!";
-//     text = "Better Luck Next Time!!!";
-//   }
-//   document.getElementById("exampleModalLabel").innerHTML = txt;
-//   document.getElementById("modal_text").innerHTML = text;
-// }
-
-// function Gif_retrieval() {
-//   let questionsCorrect = questionValidation();
-//   let txt;
-//   if (questionsCorrect >= 7) {
-//     txt = "Win";
-//   } else {
-//     txt = "Lose";
-//   }
-//   const api_url = `https://api.giphy.com/v1/gifs/search?api_key=05buYscSAn6xA1qiwVS5XZS6OqXQRMqZ&q=${txt}`;
-//   let randomnumber = Math.floor(Math.random() * 50);
-//   gifs_container.innerHTML = "";
-//   fetch(api_url)
-//     .then((res) => res.json())
-//     .then((json) => {
-//       const gifs = json.data;
-//       console.log(gifs);
-//       let randomImage = gifs[randomnumber];
-//       const url = randomImage.images.downsized_medium.url;
-//       const myImg = document.createElement("img");
-//       myImg.setAttribute("src", url);
-//       gifs_container.appendChild(myImg);
-//     });
-// }
