@@ -168,6 +168,8 @@ export function questionValidation() {
     // document.prepend(incompleteQuestionAlert);
 
     showalert();
+
+    return -1;
   } else {
     // send to modal?
     temp.forEach((element) => {
@@ -192,6 +194,8 @@ export function questionValidation() {
   }
   console.log("Questions correct: " + questionsCorrect);
   console.log(correctAnswers);
+
+  return correctAnswers;
 }
 
 function decodeHtml(html) {
