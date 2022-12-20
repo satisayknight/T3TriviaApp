@@ -1,6 +1,7 @@
 import { getQuizData, questionValidation } from "./script.js";
 
 const sumbitButton = document.getElementById("submit_button");
+const gifs_container1 = document.getElementById("gifs_container");
 
 window.addEventListener("load", getQuizData);
 
@@ -13,8 +14,9 @@ function myFunction() {
   let txt;
   let text;
   let questionsCorrect = questionValidation();
-  if ((questionsCorrect = -1)) {
-    txt = "Incomple";
+  console.log("my func" + questionsCorrect);
+  if ((questionsCorrect === -1)) {
+    txt = "Incomplete";
     text = "Complete All Questions...!!!";
   } else if (questionsCorrect >= 7) {
     txt = "You WIN!";
@@ -28,9 +30,13 @@ function myFunction() {
 }
 
 function Gif_retrieval() {
+
+  // const gifs_container = document.getElementById("gifs_container");
   let questionsCorrect = questionValidation();
+  console.log("my func" + questionsCorrect);
+
   let txt;
-  if ((questionsCorrect = -1)) {
+  if ((questionsCorrect === -1)) {
     txt = "Incomplete";
   } else if (questionsCorrect >= 7) {
     txt = "Win";
@@ -39,7 +45,7 @@ function Gif_retrieval() {
   }
   const api_url = `https://api.giphy.com/v1/gifs/search?api_key=05buYscSAn6xA1qiwVS5XZS6OqXQRMqZ&q=${txt}`;
   let randomnumber = Math.floor(Math.random() * 50);
-  gifs_container.innerHTML = "";
+  gifs_container1.innerHTML = "";
   fetch(api_url)
     .then((res) => res.json())
     .then((json) => {
@@ -49,6 +55,6 @@ function Gif_retrieval() {
       const url = randomImage.images.downsized_medium.url;
       const myImg = document.createElement("img");
       myImg.setAttribute("src", url);
-      gifs_container.appendChild(myImg);
+      gifs_container1.appendChild(myImg);
     });
 }
