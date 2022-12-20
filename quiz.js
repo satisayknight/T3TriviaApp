@@ -11,10 +11,10 @@ window.addEventListener("load", getQuizData);
 // sumbitButton.addEventListener("click", gif_Retrieval);
 // sumbitButton.addEventListener("click", modalTextData);
 
-sumbitButton.addEventListener('click',() => {    
-  gif_Retrieval();    
-  modalTextData();    
-})
+sumbitButton.addEventListener("click", () => {
+  gif_Retrieval();
+  modalTextData();
+});
 
 /**
  *
@@ -25,11 +25,13 @@ sumbitButton.addEventListener('click',() => {
  */
 function getQuizData(
   event,
-  category = "9",
+  category = localStorage.getItem("category"),
   numberOfQuestions = "10",
   difficulty = "easy",
   typeOfQuestions = "multiple"
 ) {
+  // let category = localStorage.getItem("category");
+
   const api_url = `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=${typeOfQuestions}&token=${SESSION_TOKEN}`;
 
   console.log("URL:" + api_url);
@@ -168,7 +170,6 @@ function showalert() {
     alertContainer.innerHTML = "";
   }, 5000);
 }
-
 
 function modalTextData() {
   let txt;

@@ -1,3 +1,10 @@
+const categoryMap = new Map([
+  ["category_general_knowledge", ["General Knowledge", 9]],
+  ["category_science_nature", ["Science & Nature", 17]],
+  ["category_art", ["Art", 25]],
+  ["category_animals", ["Animals", 27]],
+]);
+
 window.addEventListener("load", addCategoryListeners);
 
 /**
@@ -21,8 +28,14 @@ function getSessionToken() {
 
 function setQuizTitles(event) {
   const category = event.target.id;
-  localStorage.setItem("Title", category);
-  
+  let selectedCategory = categoryMap.get(category);
+  let categoryTitle = selectedCategory[0];
+  console.log(categoryTitle);
+  let categoryID = selectedCategory[1];
+  console.log(categoryID);
+
+  localStorage.setItem("Title", categoryTitle);
+  localStorage.setItem("category", categoryID);
 }
 
 function addCategoryListeners() {
