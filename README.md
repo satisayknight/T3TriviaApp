@@ -27,7 +27,19 @@
 + Joe Gonzalez
 
 ### Description
+Bootstrap
+GIPHY
+Undescore js
+Opentdb
+Google Fonts
+
+###Resources
 
 ### Requirements
-+ None
++ Be able to play trivia games of different topics
++ be able to tell if you win or lost
++ be able to start a new game
+
+### Presentation
+[T3 TriviA.pdf](https://github.com/satisayknight/T3TriviaApp/files/10271105/T3.TriviA.pdf)
 
