@@ -1,4 +1,4 @@
-# T3TriviaApp
+# T3TriviaApp React
 
 
 [//]: # (## Table of contents)
@@ -41,5 +41,5 @@ Google Fonts
 + be able to start a new game
 
 ### Presentation
-[T3 TriviA.pdf](https://github.com/satisayknight/T3TriviaApp/files/10271105/T3.TriviA.pdf)
++ [T3 TriviA.pdf](https://github.com/satisayknight/T3TriviaApp/files/10271105/T3.TriviA.pdf)
 
