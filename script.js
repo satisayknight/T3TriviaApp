@@ -5,7 +5,7 @@ let questionCount = 0;
 //test
 
 const Button_Test = document.getElementById("questionButton");
-// const sumbitButton = document.getElementById("sumbit_button");
+// const submitButton = document.getElementById("submit_button");
 const general_knowledge = document.getElementById("general_knowledge");
 
 let correctAnswers = [];
