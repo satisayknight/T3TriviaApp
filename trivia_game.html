@@ -39,19 +39,13 @@
         <b>Question(s):</b>
       </div>
 
-      <button id="sumbit_button">Sumbit</button>
-
-      <footer id="footer">
-        <h6>Created by: Joe G., Sarthak S., Kiaya A. | 2022</h6>
-      </footer>
-
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"
-      ></script>
-
-      <script src="./script.js"></script>
+      <button
+        id="sumbit_button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModalwin"
+      >
+        Submit
+      </button>
 
       <!-- Modal -->
       <div
@@ -75,7 +69,6 @@
             <div id="gifs_container"></div>
             <div class="modal-body" id="modal_text"></div>
             <div class="modal-footer">
-              </button>
               <a href="./index.html"
                 ><button type="button" class="btn btn-primary">
                   Return to main
@@ -85,16 +78,21 @@
           </div>
         </div>
       </div>
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"
-      ></script>
-      <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js
+
+      <footer id="footer">
+        <h6>Created by: Joe G., Sarthak S., Kiaya A. | 2022</h6>
+      </footer>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js
     "></script>
 
-      <script src="./script.js"></script>
-      <script type="module" src="./quiz.js"></script>
-    </div>
+    <script type ="module" src="./script.js"></script>
+    <script type="module" src="./quiz.js"></script>
   </body>
 </html>

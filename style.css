@@ -5,9 +5,9 @@
 }
 
 .nav {
-  background: #D5F2E3;
+  background: #d5f2e3;
   font-size: large;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 header {
@@ -17,7 +17,7 @@ header {
 .page-title {
   display: flex;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 800;
   letter-spacing: 10px;
   font-size: 52px;
@@ -26,7 +26,7 @@ header {
 .page-description {
   display: flex;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 500;
   font-size: 24px;
 }
@@ -37,9 +37,9 @@ header {
 }
 
 .page-intro-paragraph {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 400;
-  border: 4px dotted #D5F2E3;
+  border: 4px dotted #d5f2e3;
   width: 60%;
   margin-top: 50px;
   padding: 20px;
@@ -55,14 +55,14 @@ header {
   justify-content: center;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 700;
   font-size: 24px;
-  border-bottom: solid #D5F2E3;
+  border-bottom: solid #d5f2e3;
   width: 25%;
 }
 
-.game-container{
+.game-container {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -70,14 +70,17 @@ header {
   font-size: 24px;
 }
 
-.general-knowledge, .science-nature-game, .art-game, .animals-game{
+.general-knowledge,
+.science-nature-game,
+.art-game,
+.animals-game {
   text-decoration: none;
   color: black;
-  border: 10px solid #D5F2E3;
+  border: 10px solid #d5f2e3;
   width: 25%;
   padding: 20px;
   text-align: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 500;
   margin-left: 10px;
   margin-right: 10px;
@@ -96,8 +99,9 @@ header {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.card-text, .btn {
-  font-family: 'JetBrains Mono', monospace;
+.card-text,
+.btn {
+  font-family: "JetBrains Mono", monospace;
 }
 
 .btn {
@@ -111,11 +115,11 @@ header {
 
 .question-card {
   margin-bottom: 2rem;
-  border: 2px solid #D5F2E3;
+  border: 2px solid #d5f2e3;
   /* box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   border-width: 20%;
   border-radius: 7px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 #sumbit_button {
@@ -125,7 +129,7 @@ header {
 #footer {
   display: flex;
   justify-content: space-around;
-  background: #D5F2E3;
+  background: #d5f2e3;
   width: 100%;
   padding: 10px 10px 10px;
   bottom: 0;
@@ -134,6 +138,15 @@ header {
   text-align: center;
 }
 
-#gifs_container{
-  max-width: 200px;}
+#gifs_container {
+  max-width: 200px;
+}
 
+.alert-fixed {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 9999;
+  border-radius: 0px;
+}
