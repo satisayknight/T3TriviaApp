@@ -174,7 +174,7 @@ export function questionValidation() {
       // console.log(element.id);
 
       let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
-      let labelAnswerText = labelTest.textContent
+      let labelAnswerText = elementLabal.textContent
         .replace(/[\n\r]+|[\s]{2,}/g, " ")
         .trim();
 

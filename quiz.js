@@ -4,7 +4,7 @@ const sumbitButton = document.getElementById("sumbit_button");
 
 window.addEventListener("load", getQuizData);
 
-sumbitButton.addEventListener("click", questionValidation);
+// sumbitButton.addEventListener("click", questionValidation);
 
 sumbitButton.addEventListener("click", Gif_retrieval);
 sumbitButton.addEventListener("click", myFunction);
