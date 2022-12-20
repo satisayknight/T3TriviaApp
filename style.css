@@ -40,8 +40,14 @@ header {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 400;
   border: 4px dotted #D5F2E3;
-  width: 50%;
+  width: 60%;
   margin-top: 50px;
+  padding: 20px;
+}
+
+.category-text-container {
+  display: flex;
+  justify-content: center;
 }
 
 .catgegory-text {
@@ -52,6 +58,8 @@ header {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
   font-size: 24px;
+  border-bottom: solid #D5F2E3;
+  width: 25%;
 }
 
 .game-container{
@@ -96,6 +104,24 @@ header {
   margin-top: 20px;
 }
 
+#question_container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.question-card {
+  margin-bottom: 2rem;
+  border: 2px solid #D5F2E3;
+  /* box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  border-width: 20%;
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#sumbit_button {
+  margin-bottom: 80px;
+}
+
 #footer {
   display: flex;
   justify-content: space-around;
@@ -106,11 +132,6 @@ header {
   position: absolute;
   color: #0d6efd;
   text-align: center;
-}
-
-.animal-image {
-  width: 50%;
-  height: 50%;
 }
 
 #gifs_container{

@@ -110,7 +110,7 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   // <li><input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3" checked>
 
   const questionTemplate = `
-  <div class="card">
+  <div class="question-card">
   <div class="card-body">
     <b>${questionCount}. ${question}</b>
     <div class="form-group">
