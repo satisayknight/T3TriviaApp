@@ -1,6 +1,6 @@
 import { getQuizData, questionValidation } from "./script.js";
 
-const sumbitButton = document.getElementById("sumbit_button");
+const sumbitButton = document.getElementById("submit_button");
 
 window.addEventListener("load", getQuizData);
 
@@ -13,7 +13,10 @@ function myFunction() {
   let txt;
   let text;
   let questionsCorrect = questionValidation();
-  if (questionsCorrect >= 7) {
+  if ((questionsCorrect = -1)) {
+    txt = "Incomple";
+    text = "Complete All Questions...!!!";
+  } else if (questionsCorrect >= 7) {
     txt = "You WIN!";
     text = "Great Job...!!!";
   } else {
@@ -27,7 +30,9 @@ function myFunction() {
 function Gif_retrieval() {
   let questionsCorrect = questionValidation();
   let txt;
-  if (questionsCorrect >= 7) {
+  if ((questionsCorrect = -1)) {
+    txt = "Incomplete";
+  } else if (questionsCorrect >= 7) {
     txt = "Win";
   } else {
     txt = "Lose";

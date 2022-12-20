@@ -195,7 +195,7 @@ export function questionValidation() {
   console.log("Questions correct: " + questionsCorrect);
   console.log(correctAnswers);
 
-  return correctAnswers;
+  return questionsCorrect;
 }
 
 function decodeHtml(html) {
