@@ -35,15 +35,23 @@
       <div id="question_container">
         <b>Question(s):</b>
       </div>
-
-      <button
-        id="submit_button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModalwin"
-      >
-        Submit
-      </button>
+      <div id="button_container">
+        <button
+          id="submit_button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalwin"
+        >
+          Submit
+        </button>
+        <button
+          id="refresh_button"
+          class="btn btn-primary"
+          onClick="window.location.reload();"
+        >
+          Start New Game
+        </button>
+      </div>
 
       <!-- Modal -->
       <div
