@@ -135,6 +135,7 @@ function questionValidation() {
     showalert();
     return -1;
   } else {
+    document.getElementById("submit_button").disabled = true;
     temp.forEach((element) => {
       let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
       let labelAnswerText = elementLabal.textContent
@@ -145,7 +146,6 @@ function questionValidation() {
         console.log("✅ String is contained in Array");
         questionsCorrect++;
         element.style.background = "#08fc7e";
-        element.disabled = true;
       } else {
         console.log("⛔️ String is NOT contained in Array");
         element.style.background = "#f52c03";
