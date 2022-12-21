@@ -139,8 +139,10 @@ function questionValidation() {
       if (correctAnswers.includes(labelAnswerText)) {
         console.log("✅ String is contained in Array");
         questionsCorrect++;
+        element.style.background = "#08fc7e";
       } else {
         console.log("⛔️ String is NOT contained in Array");
+        element.style.background = "#f52c03";
       }
     });
   }
@@ -198,10 +200,13 @@ function gif_Retrieval() {
 
   if (questionsCorrect === -1) {
     txt = "Incomplete";
+    document.getElementById("Review_button").style.display = "none";
   } else if (questionsCorrect >= 7) {
     txt = "Win";
+    document.getElementById("Review_button").style.display = "block";
   } else {
     txt = "Lose";
+    document.getElementById("Review_button").style.display = "block";
   }
 
   const api_url = `https://api.giphy.com/v1/gifs/search?api_key=05buYscSAn6xA1qiwVS5XZS6OqXQRMqZ&q=${txt}`;
