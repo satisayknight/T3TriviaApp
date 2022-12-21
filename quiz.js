@@ -68,6 +68,8 @@ function getQuizData(
  */
 function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   questionCount++;
+  let randomize_numbers = [0, 1, 2, 3];
+  randomize_numbers = _.shuffle(randomize_numbers);
 
   const questionQuestionContainer =
     document.getElementById("question_container");
@@ -80,25 +82,25 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
     <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}0">
       <label class="form-check-label" for="flexRadioDefault${questionCount}0">
-      ${answers[0]}
+      ${answers[randomize_numbers[0]]}
       </label>
       </div>
       <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}1">
       <label class="form-check-label" for="flexRadioDefault${questionCount}1">
-      ${answers[1]}
+      ${answers[randomize_numbers[1]]}
       </label>
       </div>
       <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}2">
       <label class="form-check-label" for="flexRadioDefault${questionCount}2">
-      ${answers[2]}
+      ${answers[randomize_numbers[2]]}
       </label>
       </div>
       <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
       <label class="form-check-label" for="flexRadioDefault${questionCount}3">
-      ${answers[3]}
+      ${answers[randomize_numbers[3]]}
       </label>
       </div>
       </div>
@@ -116,6 +118,7 @@ function questionValidation() {
 
   const questionRadioButtons = document.querySelectorAll('[id ^= "flexRadio"]');
   let temp = [];
+  let unchecked = [];
   console.log(questionRadioButtons);
 
   questionRadioButtons.forEach((element) => {
@@ -124,6 +127,7 @@ function questionValidation() {
       console.log("Checked: " + questionsChecked);
       temp.push(element);
     } else {
+      unchecked.push(element);
     }
   });
 
@@ -136,13 +140,33 @@ function questionValidation() {
       let labelAnswerText = elementLabal.textContent
         .replace(/[\n\r]+|[\s]{2,}/g, " ")
         .trim();
+      //change all the correct answers to green
       if (correctAnswers.includes(labelAnswerText)) {
         console.log("✅ String is contained in Array");
         questionsCorrect++;
         element.style.background = "#08fc7e";
+        element.disabled = true;
       } else {
         console.log("⛔️ String is NOT contained in Array");
         element.style.background = "#f52c03";
+        unchecked.forEach((element) => {
+          let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
+          let labelAnswerText = elementLabal.textContent
+            .replace(/[\n\r]+|[\s]{2,}/g, " ")
+            .trim();
+          if (correctAnswers.includes(labelAnswerText)) {
+            console.log(" String contained in Unchecked");
+            element.style.background = "#08fc7e";
+            element.disabled = true;
+          } else {
+            element.disabled = true;
+          }
+        });
+
+        // let test = element.parentNode.parentNode.childNodes;
+        // test.forEach(function (item) {
+        //   console.log(item);
+        // });
       }
     });
   }
