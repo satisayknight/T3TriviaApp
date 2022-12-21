@@ -66,8 +66,11 @@ function getQuizData(
  * @param {number} question - a number from 9-32 indicates which category
  * @param {number} answers - a number indicates how many questions are returned range(1-50)
  */
+
 function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
   questionCount++;
+  let randomize_numbers = [0, 1, 2, 3];
+  randomize_numbers = _.shuffle(randomize_numbers);
 
   const questionQuestionContainer =
     document.getElementById("question_container");
@@ -80,25 +83,25 @@ function populateQuestions(question = "PlaceHolder", answers = [1, 2, 3, 4]) {
     <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}0">
       <label class="form-check-label" for="flexRadioDefault${questionCount}0">
-      ${answers[0]}
+      ${answers[randomize_numbers[0]]}
       </label>
       </div>
       <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}1">
       <label class="form-check-label" for="flexRadioDefault${questionCount}1">
-      ${answers[1]}
+      ${answers[randomize_numbers[1]]}
       </label>
       </div>
       <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}2">
       <label class="form-check-label" for="flexRadioDefault${questionCount}2">
-      ${answers[2]}
+      ${answers[randomize_numbers[2]]}
       </label>
       </div>
       <div>
       <input class="form-check-input" type="radio" name="flexRadioDefault${questionCount}" id="flexRadioDefault${questionCount}3">
       <label class="form-check-label" for="flexRadioDefault${questionCount}3">
-      ${answers[3]}
+      ${answers[randomize_numbers[3]]}
       </label>
       </div>
       </div>
