@@ -1,20 +1,16 @@
 const SESSION_TOKEN = "";
+const sumbitButton = document.getElementById("submit_button");
+const gifs_container = document.getElementById("gifs_container");
 
 let questionCount = 0;
 let correctAnswers = [];
+let quizKey = 0;
+let correctAnswersAfterValidation = 0;
 
-const sumbitButton = document.getElementById("submit_button");
-const gifs_container = document.getElementById("gifs_container");
 quiz_title.innerHTML = localStorage.getItem("Title");
 window.addEventListener("load", getQuizData);
 
-// sumbitButton.addEventListener("click", gif_Retrieval);
-// sumbitButton.addEventListener("click", modalTextData);
-
-sumbitButton.addEventListener("click", () => {
-  gif_Retrieval();
-  modalTextData();
-});
+sumbitButton.addEventListener("click", questionValidation);
 
 /**
  *
@@ -30,28 +26,18 @@ function getQuizData(
   difficulty = "easy",
   typeOfQuestions = "multiple"
 ) {
-  // let category = localStorage.getItem("category");
-
-  const api_url = `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=${typeOfQuestions}&token=${SESSION_TOKEN}`;
+  const api_url = `https://triviavalidationserver.onrender.com/api?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=${typeOfQuestions}&token=${SESSION_TOKEN}`;
 
   console.log("URL:" + api_url);
 
   fetch(api_url)
     .then((res) => res.json())
     .then((json) => {
-      console.log(json["results"]);
-
-      let questions = json["results"];
-
-      for (let index = 0; index < questions.length; index++) {
-        let question = questions[index].question;
-        let answersArray = questions[index].incorrect_answers;
-        let correctAnswer = questions[index].correct_answer;
-        answersArray.push(correctAnswer);
-        correctAnswers.push(decodeHtml(correctAnswer));
-
-        //shuffle array here
-        // answersArray = _.shuffle(answersArray)
+      for (let index = 0; index < json.length; index++) {
+        let question = json[index].question;
+        let answersArray = json[index].all_answers;
+        correctAnswers.push(json[index].all_answers[3]);
+        quizKey = json[index].quiz_key;
 
         populateQuestions(question, answersArray);
       }
@@ -119,12 +105,10 @@ function questionValidation() {
   const questionRadioButtons = document.querySelectorAll('[id ^= "flexRadio"]');
   let temp = [];
   let unchecked = [];
-  console.log(questionRadioButtons);
 
   questionRadioButtons.forEach((element) => {
     if (element.checked) {
       questionsChecked++;
-      console.log("Checked: " + questionsChecked);
       temp.push(element);
     } else {
       unchecked.push(element);
@@ -136,46 +120,45 @@ function questionValidation() {
     return -1;
   } else {
     document.getElementById("submit_button").disabled = true;
+
+    let tempArray = [];
+
     temp.forEach((element) => {
       let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
       let labelAnswerText = elementLabal.textContent
         .replace(/[\n\r]+|[\s]{2,}/g, " ")
         .trim();
-      //change all the correct answers to green
-      if (correctAnswers.includes(labelAnswerText)) {
-        console.log("✅ String is contained in Array");
-        questionsCorrect++;
-        element.style.background = "#08fc7e";
-      } else {
-        console.log("⛔️ String is NOT contained in Array");
-        element.style.background = "#f52c03";
-        unchecked.forEach((element) => {
-          let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
-          let labelAnswerText = elementLabal.textContent
-            .replace(/[\n\r]+|[\s]{2,}/g, " ")
-            .trim();
-          if (correctAnswers.includes(labelAnswerText)) {
-            console.log(" String contained in Unchecked");
-            element.style.background = "#08fc7e";
-            element.disabled = true;
-          } else {
-            element.disabled = true;
-          }
-        });
 
-        // let test = element.parentNode.parentNode.childNodes;
-        // test.forEach(function (item) {
-        //   console.log(item);
-        // });
-      }
+      tempArray.push(labelAnswerText);
     });
+
+    let data = {
+      quiz_key: quizKey,
+      answers: tempArray,
+    };
+
+    const body = JSON.stringify(data);
+
+    fetch("https://triviavalidationserver.onrender.com/validate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    })
+      .then((response) => response.json())
+      .then((data1) => {
+        questionsCorrect = colorAnswers(data1, temp, unchecked);
+      });
   }
-  console.log("Questions correct: " + questionsCorrect);
-  console.log(correctAnswers);
 
   return questionsCorrect;
 }
 
+/**
+ *
+ * @param {string} html - a string that contains html entities to be removed
+ */
 function decodeHtml(html) {
   const tempTxt = document.createElement("textarea");
   tempTxt.innerHTML = html;
@@ -200,12 +183,12 @@ function showalert() {
 function modalTextData() {
   let txt;
   let text;
-  let questionsCorrect = questionValidation();
-  console.log("my func" + questionsCorrect);
-  if (questionsCorrect === -1) {
+  // let questionsCorrect = questionValidation();
+  // console.log("my func" + questionsCorrect);
+  if (correctAnswersAfterValidation === -1) {
     txt = "Incomplete";
     text = "Complete All Questions...!!!";
-  } else if (questionsCorrect >= 7) {
+  } else if (correctAnswersAfterValidation >= 7) {
     txt = "You WIN!";
     text = "Great Job...!!!";
   } else {
@@ -217,15 +200,15 @@ function modalTextData() {
 }
 
 function gif_Retrieval() {
-  let questionsCorrect = questionValidation();
+  // let questionsCorrect = questionValidation();
   let randomnumber = Math.floor(Math.random() * 50);
   let txt;
   gifs_container.innerHTML = "";
 
-  if (questionsCorrect === -1) {
+  if (correctAnswersAfterValidation === -1) {
     txt = "Incomplete";
     document.getElementById("Review_button").style.display = "none";
-  } else if (questionsCorrect >= 7) {
+  } else if (correctAnswersAfterValidation >= 7) {
     txt = "Win";
     document.getElementById("Review_button").style.display = "block";
   } else {
@@ -239,11 +222,54 @@ function gif_Retrieval() {
     .then((res) => res.json())
     .then((json) => {
       const gifs = json.data;
-      console.log(gifs);
+      // console.log(gifs);
       let randomImage = gifs[randomnumber];
       const url = randomImage.images.downsized_medium.url;
       const myImg = document.createElement("img");
       myImg.setAttribute("src", url);
       gifs_container.appendChild(myImg);
     });
+}
+
+/**
+ *
+ * @param {JSON} data - a json object that contains two keys the number of questions correct and all the correct answers for the quiz by id
+ * @param {NODES} answersButtons - a list of nodes containing the buttons that the users checked when sumbitting the quiz.
+ * @param {NODES} unchecked - a list of nodes containing the buttons that the users DID NOT check when sumbitting the quiz.
+ */
+function colorAnswers(data, answersButtons, unchecked) {
+  let questionsCorrect = 0;
+  let correctAnswersArray = data["all_answers"];
+
+  answersButtons.forEach((element) => {
+    let elementLabel = document.querySelector(`[for ^= "${element.id}"]`);
+    let elementlabelAnswerText = elementLabel.textContent
+      .replace(/[\n\r]+|[\s]{2,}/g, " ")
+      .trim();
+
+    if (correctAnswersArray.includes(elementlabelAnswerText)) {
+      // console.log("✅ String is contained in Array");
+      questionsCorrect++;
+      element.style.background = "#08fc7e";
+    } else {
+      // console.log("⛔️ String is NOT contained in Array");
+      element.style.background = "#f52c03";
+      unchecked.forEach((element) => {
+        element.disabled = true;
+        let elementLabal = document.querySelector(`[for ^= "${element.id}"]`);
+        let labelAnswerText = elementLabal.textContent
+          .replace(/[\n\r]+|[\s]{2,}/g, " ")
+          .trim();
+        if (correctAnswersArray.includes(labelAnswerText)) {
+          // console.log("String contained in Unchecked");
+          element.style.background = "#08fc7e";
+        }
+      });
+    }
+  });
+
+  correctAnswersAfterValidation = questionsCorrect;
+
+  gif_Retrieval();
+  modalTextData();
 }
