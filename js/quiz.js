@@ -5,7 +5,7 @@ const gifs_container = document.getElementById("gifs_container");
 let questionCount = 0;
 let correctAnswers = [];
 let quizKey = 0;
-let correctAnswersAfterValidation = 0;
+let correctAnswersAfterValidation = -1;
 
 quiz_title.innerHTML = localStorage.getItem("Title");
 window.addEventListener("load", getQuizData);
@@ -117,6 +117,8 @@ function questionValidation() {
 
   if (questionsChecked != 10) {
     showalert();
+    gif_Retrieval();
+    modalTextData();
     return -1;
   } else {
     document.getElementById("submit_button").disabled = true;
